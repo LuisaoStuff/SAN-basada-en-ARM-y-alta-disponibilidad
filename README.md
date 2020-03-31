@@ -20,5 +20,7 @@ Esto es en lo que, como mínimo, basaré el proyecto. No obstante dependiendo de
 
 ---------------------
 **Modelo** de la placa: https://www.ldlc.com/es-es/ficha/PB00269570.html
+
 **Especificaciones procesador**: https://gadgetversus.com/processor/samsung-exynos-5-octa-5422-specs/
+
 Documentación **Armbian**: https://docs.armbian.com/
