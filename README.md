@@ -6,11 +6,11 @@ Usaré tres placas **Odroid-hc1** para crear un cluster de almacenamiento (con a
 
 ### Tecnologías que se van a utilizar
 
-Usaré el la última versión de **Armbian**, una distribución pensada para esta arquitectura y que soporta el procesador que tiene la placa. Para el sistema de _alta disponibilidad_ usaré **PeaceMaker**, junto con **DRBD** para la sincronización de los discos e **ISCSI** a la hora de exportar los dispositivos de bloques.
+Usaré el la última versión de **Ubuntu 20.04.1 LTS**, una distribución pensada para esta arquitectura y que soporta el procesador que tiene la placa. Para el sistema de _alta disponibilidad_ usaré **PeaceMaker**, junto con **DRBD** para la sincronización de los discos e **ISCSI** a la hora de exportar los dispositivos de bloques.
 
 ### Resultados que se esperan obtener
 
-Mi intención es conseguir un cluster de almacenamiento, escalable, con un consumo energético muy bajo y en alta disponibilidad.
+Mi intención es conseguir un cluster de almacenamiento escalable, con un consumo energético muy bajo y en alta disponibilidad.
 
 Esto es en lo que, como mínimo, basaré el proyecto. No obstante dependiendo del tiempo que tenga, lo ampliaré añadiendo una o varias de las siguientes funcionalidades:
 
