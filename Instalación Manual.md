@@ -1,17 +1,5 @@
 # Instalación de las máquinas
 
-## Revisión del hardware
-
-Utilizaremos dos máquinas [Odroid-HC1](https://www.hardkernel.com/shop/odroid-hc1-home-cloud-one/), alimentadas por un [transformador](https://www.hardkernel.com/shop/5v-4a-power-supply-eu-plug-2/) de 5V/4A cada una, e instalaremos el sistema operativo en una _tarjeta microSD_ modelo [Sandisk Industrial 8Gb](https://www.mouser.com/datasheet/2/669/SanDisk_Industrial%20Grade%20SD%20%20MicroSD%20Product%20Brief-805940.pdf), además de dos latiguillos [ethernet Cat-5e](https://www.amazon.es/dp/B00BS9JXPA?ref=ppx_pop_mob_ap_share). Como disco duro para el almacenamiento en alta disponibilidad, usaremos dos discos _SSD_ [Kingston 128Gb](https://www.amazon.es/dp/B073VFG4C7/ref=cm_sw_r_wa_apap_LAsbMrtrxJSpL).
-
-### Características de Odroid-HC1
-
-* CPU: [Samsung Exynos5422 Cortex-A15](https://www.samsung.com/semiconductor/global.semi.static/minisite/exynos/file/solution/MobileProcessor-5-Octa-5422.pdf)
-* RAM: 2Gb LPDDR3
-* Interfaz SATA3
-* Puerto Gigabit Ethernet
-* Consumo: 3.7W ~ 9.8W
-
 ## Preparación de las tarjetas microSD
 
 Al tratarse de una arquitectura distinta a **x86**, nos encontramos que el método de instalación del sistema operativo es también distinto. En **ARM** se realiza la instalación del SO en el disco duro principal previo a tu inserción en el equipo. Este proceso podemos realizarlo de dos formas; utilizando el paquete `dd` o usando uno de los múltiples binarios disponibles tanto para _windows_ como para _linux_, ya sean [Balenaetcher](https://www.balena.io/etcher/) o el recientemente lanzado [Raspberry Pi Imager](https://www.raspberrypi.org/downloads/).
