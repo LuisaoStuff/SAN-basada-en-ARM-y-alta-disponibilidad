@@ -10,8 +10,8 @@
 
 Si compraramos el consumo con el servidor NAS que tengo en casa (cuyo procesador es un [Intel Xeon X3470](https://ark.intel.com/content/www/es/es/ark/products/42932/intel-xeon-processor-x3470-8m-cache-2-93-ghz.html)), su consumo está comprendido entre **46W** y los **127W**. Como podemos observar, estamos hablando de un consumo entre **12 y 13** menor con un rendimiento bastante parejo.
 
-Esta diferencia de consumo tan destacada tiene su explicación en cómo están diseñadas ambas arquitecturas. Mientras **x86** es una arquitectura con un esquema de procesadores lógicos **genéricos**, **ARM** está basado en el esquema **Big-Little**. ¿En qué consiste?
-Cada vez nos encontramos con dispositivos diseñados para tareas específicas que necesitan poca potencia o un consumo muy bajo maximizar el tiempo de uso de las baterías en el caso de dispositivos móviles. Es por eso que se diseñó **Big-Little** que consiste en dos bloques de procesamiento; uno para tareas poco demandantes a nivel computacional (ofimática, servicios esenciales, navegar por internet, etc) y otro para tareas de altas prestaciones (renderizado de imágenes o video, videojuegos, etc). En el caso del procesador **samsung** que dispone esta placa, tendríamos este esquema:
+Esta diferencia de consumo tan destacada tiene su explicación en cómo están diseñadas ambas arquitecturas. Mientras **x86** es una arquitectura con un esquema de **procesadores lógicos genéricos**, **ARM** está basado en el esquema **big.LITTLE**. ¿En qué consiste?
+Cada vez nos encontramos con dispositivos diseñados para tareas específicas que necesitan poca potencia o un consumo muy bajo maximizar el tiempo de uso de las baterías en el caso de dispositivos móviles. Es por eso que se diseñó **big.LITTLE** que consiste en dos bloques de procesamiento; uno para tareas poco demandantes a nivel computacional (ofimática, servicios esenciales, navegar por internet, etc) y otro para tareas de altas prestaciones (renderizado de imágenes o video, videojuegos, etc). En el caso del procesador **samsung** que dispone esta placa, tendríamos este esquema:
 
 ![](/recursos/img/big-little.png)
 
@@ -21,7 +21,7 @@ Además de esta particularidad, en los últimos años **ARM** ha optado por segu
 
 ![](/recursos/img/system-on-a-chip.png)
 
-
+Una prueba de que este modelo de sistema está siendo un éxito es que hace poco, **Intel** ha desarrollado la nueva familia [Lakefield](https://ark.intel.com/content/www/es/es/ark/products/codename/81657/lakefield.html). Es una nueva generación de procesadores **x86** está basado en **big.LITTLE** de _5 núcleos_; 4 "little" y 1 "big".
 
 ## Pruebas de rendimiento
 
