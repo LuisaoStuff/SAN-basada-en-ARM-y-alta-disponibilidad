@@ -26,3 +26,16 @@ Una prueba de que este modelo de sistema está siendo un éxito es que hace poco
 ## Pruebas de rendimiento
 
 Para realizar las pruebas, me limitaré a utilizar el paquete **samba**. Probaré a subir y descargar un fichero de 5Gb.
+
+### ARM
+
+![](/recursos/img/ARM-Descarga.png)
+![](/recursos/img/ARM-Subida.png)
+
+* Hemos obtenido una velocidad media tanto de subida como de bajada de unos **60Mbs**
+
+### x86
+
+![](/recursos/img/x86-Descarga.png)
+![](/recursos/img/x86-Subida.png)
+
