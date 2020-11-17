@@ -144,37 +144,94 @@ mmcblk1
 └─mmcblk1p2 ext4   rootfs e139ce78-9841-40fe-8823-96a304a09859      5G    29% /
 ```
 
-Una vez tenemos todo esto preparado, comenzamos a crear y configurar los **recursos** de **pacemaker**. Estos son **agentes** gestionados por **corosync** para que los paquetes en cuestión esten sincronizados entre los distintos nodos y puedan beneficiarse del cluster en si mismo. Entre otras cosas, necesitaremos una **IP virtual** para identificar al cluster, el recurso de **drbd** para que **pacemaker** pueda gestionarlo, 
+Una vez tenemos todo esto preparado, comenzamos a crear y configurar los **recursos** de **pacemaker**. Estos son **agentes** gestionados por **corosync** para que los paquetes en cuestión esten sincronizados entre los distintos nodos y puedan beneficiarse del _cluster_ en si mismo. Aunque antes de empezar a generarlos, tendremos que desactivar la opción **Stonith** para que funcione correctamente. 
 
---# Creo IP virtual para iscsi
+```
+pcs property set stonith-enabled=false
+```
 
-pcs resource create iscsi-ip ocf:heartbeat:IPaddr1 ip=192.168.1.200 cidr_netmask=24 --group iscsi
+Esto es porque dicha opción se encarga de, a través de un conjunto de recursos, **garantizar la integridad de los datos** en el _cluster_. Esta funcionalidad está basada en _hardware_ y _software_, pero en mi caso conseguiremos ese resultado gracias a **drbd**. Dicho esto, necesitaremos una **IP virtual** para identificar el recurso de **ISCSI** que más tarde crearemos.
 
+```
+pcs resource create iscsi-ip ocf:heartbeat:IPaddr ip=192.168.1.200 cidr_netmask=24 --group iscsi
+```
 
---# Creo recurso drbd
+Después ejecutamos estas instrucciones para generar el recurso de **drbd** dentro del _cluster_.
 
-pcs -f /root/cluster resource create HADISK ocf:linbit:drbd drbd_resource=hadisk
-pcs -f /root/cluster resource promotable HADISK meta master-max=1 master-node-max=1 clone-max=2 clone-node-max=1 notify=true
-pcs cluster cib-push /root/cluster
+```
+pcs resource create HADISK ocf:linbit:drbd drbd_resource=hadisk
+pcs resource promotable HADISK meta master-max=1 master-node-max=1 clone-max=2 clone-node-max=1 notify=true
+```
 
+Y lo configuramos para que pueda gestionarlo **ISCSI**.
 
---# Creo recurso iscsi
-
-rm -f /root/cluster
-pcs cluster cib /root/cluster
+```
 pcs constraint order promote HADISK-clone then start iscsi id=iscsi-always-after-master-hadisk
 pcs constraint colocation add iscsi with master HADISK-clone INFINITY id=iscsi-group-where-master-hadisk
+```
 
+Por último solo tendremos que crear el **target** y la **lun** a través de **pacemaker**. Podrán encontrar algo más de información sobre el funcionamiento y la configuración de **ISCSI** en [esta entrada](https://blog.luisvazquezalejo.es/Introducci%C3%B3n-a-ISCSI/) de mi blog técnico.
 
---# Creo el target y los initiators permitidos, después añado la unidad lógica
+```
+pcs resource create iscsi-target ocf:heartbeat:iSCSITarget implementation="tgt" portals="192.168.1.200" iqn="iqn.2020-10.es.luisvazquezalejo:prueba" allowed_initiators="192.168.1.39 192.168.1.43" tid="1"  --group iscsi
 
-rm -f /root/cluster
-pcs cluster cib /root/cluster
-pcs resource create iscsi-target ocf:heartbeat:iSCSITarget implementation="tgt" portals="192.168.1.200" iqn="iqn.2020-10.es.luisvazquezalejo:prueba" allowed_initiators="iqn.2020-10.es.luisvazquezalejo:prueba" tid="1"  --group iscsi
 pcs resource create iscsi-lun1 ocf:heartbeat:iSCSILogicalUnit implementation="tgt" target_iqn=iqn.2020-10.es.luisvazquezalejo:prueba lun=1 path=/dev/drbd0 scsi_id="prueba.lun1" scsi_sn="1" --group iscsi
 pcs cluster cib-push /root/cluster
+```
+### Parámetros importantes
+
+* `implementation=tgt`: Incidamos el paquete que usuará para gestionar los **target** y las **lun**
+* `portals="192.168.1.200"`: Será la dirección IP a través de la cual, los clientes accederán a los recursos de **ISCSI**
+* `iqn="iqn.2020-10.es.luisvazquezalejo:prueba"`: Es un parámetro propio de **ISCSI** e indica la dirección que usarán los clientes para conectarse.
+* `allowed_initiators="192.168.1.39 192.168.1.43"`: Es un parámetro propio de **ISCSI** y sirve para especificar qué clientes tienen permiso para acceder a las **lun**. Funcionaría de una forma parecida a las **ACL**.
+* `path=/dev/drbd0`: Es la ruta de la unidad física o lógica que usaremos, en este caso la unidad generada por **drbd**.
 
 
+
+Podemos comprobar el estado y funcionamiento del **target** y la **lun** ejecutando el siguiente comando:
+
+```
+tgtadm --lld iscsi --op show --mode target
+
+Target 1: iqn.2020-10.es.luisvazquezalejo:prueba
+    System information:
+        Driver: iscsi
+        State: ready
+    I_T nexus information:
+    LUN information:
+        LUN: 0
+            Type: controller
+            SCSI ID: IET     00010000
+            SCSI SN: beaf10
+            Size: 0 MB, Block size: 1
+            Online: Yes
+            Removable media: No
+            Prevent removal: No
+            Readonly: No
+            SWP: No
+            Thin-provisioning: No
+            Backing store type: null
+            Backing store path: None
+            Backing store flags: 
+        LUN: 1
+            Type: disk
+            SCSI ID: prueba.lun1
+            SCSI SN: 1
+            Size: 120030 MB, Block size: 512
+            Online: Yes
+            Removable media: No
+            Prevent removal: No
+            Readonly: No
+            SWP: No
+            Thin-provisioning: No
+            Backing store type: rdwr
+            Backing store path: /dev/drbd0
+            Backing store flags: 
+    Account information:
+    ACL information:
+        192.168.1.39
+        192.168.1.43
+```
 
 
 --# Instalamos iscsi en el cliente
@@ -192,7 +249,7 @@ iscsiadm --mode node --targetname iqn.2020-10.es.luisvazquezalejo:prueba --porta
 
 
 
-pcs resource create iscsi-target ocf:heartbeat:iSCSITarget implementation="tgt" portals="192.168.1.200" iqn="iqn.2020-10.es.luisvazquezalejo:prueba" allowed_initiators="192.168.1.39 192.168.1.43" tid="1"  --group iscsi
+
 
 
 
