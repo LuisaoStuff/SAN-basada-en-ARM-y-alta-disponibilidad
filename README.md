@@ -23,6 +23,4 @@ Esto es en lo que, como mínimo, basaré el proyecto. No obstante dependiendo de
 
 **Especificaciones procesador**: https://gadgetversus.com/processor/samsung-exynos-5-octa-5422-specs/
 
-Documentación **Armbian**: https://docs.armbian.com/
-
 
