@@ -24,6 +24,13 @@ dd bs=4M if=ubuntu-20.04.1-5.4-minimal-odroid-xu4-20200812.img of=/dev/sdb conv=
 Donde **ubuntu-20.04.1-5.4-minimal-odroid-xu4-20200812.img** sería el fichero imagen, y **/deb/sdb** sería el dispositivo de bloque, que en nuestro caso es la _tarjeta microSD_.
 Repetiríamos el proceso para la segunda tarjeta.
 
+Para un primer acceso, dependiendo de la versión de ubuntu que hayamos instalado, tendremos las siguientes credenciales en el primer acceso:
+
+| 			     | Ubuntu MATE	  | Ubuntu Minimal  |
+| :------------: | :------------: | :-------------: |
+|  user:password | odroid:odroid  | 	 -	     	|
+|  user:password | root:odroid	  |  root:odroid  	|
+
 ## Montaje del equipo
 
 La placa tiene un disipador pasivo de serie, que funcionará también como soporte del disco duro y "carcasa". Este sistema de fabricación está basado en el concepto de montaje de servidores en [Rack](https://es.wikipedia.org/wiki/Unidad_rack) ya que el propio disipador está diseñado para poder apilar múltiples unidades con la posibilidad de instalar ventiladores.
