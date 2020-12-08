@@ -1,0 +1,24 @@
+- name: Actualizar sistemas
+  apt: update_cache=yes 
+
+- name: Instalar todos los paquetes
+  apt: 
+    pkg:
+    - pacemaker
+    - pcs
+    - tgt
+    - drbd-utils
+
+- name: Cambiar contraseña al usuario hacluster
+  user:
+      name: hacluster
+      password: "{{ 'hacluster' | password_hash('sha512') }}"
+
+- name: Copiar /etc/hosts
+  copy: >
+    src=etc/hosts
+    dest=/etc/hosts
+    mode=644
+    owner=root
+    group=root
+

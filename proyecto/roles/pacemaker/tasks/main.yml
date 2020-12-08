@@ -1,0 +1,33 @@
+- name: Copiar script inicialización
+  copy: >
+    src=cluster_start.bash
+    dest=/root/cluster_start.bash
+    mode=644
+    owner=root
+    group=root
+
+- name: Inicializar el cluster
+  command: bash /root/cluster_start.bash
+
+- name: Copiar script configuración
+  copy: >
+    src=cluster_config.bash
+    dest=/root/cluster_config.bash
+    mode=644
+    owner=root
+    group=root
+  when: ansible_hostname == 'spongebob'
+
+- name: Configurar recursos del cluster
+  command: bash /root/cluster_config.bash
+  when: ansible_hostname == 'spongebob'
+
+- name: Habilitar unidad Pacemaker
+  systemd:
+    - name: pacemaker
+    - enabled: yes
+
+- name: Habilitar unidad Corosync
+  systemd:
+    - name: corosync
+    - enabled: yes

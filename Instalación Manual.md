@@ -58,7 +58,7 @@ También vamos a declarar en el fichero `/etc/hosts` la resolución de ambas má
 Para la gestión de los distintos recursos y la creación del propio **cluster**, utilizaremos la herramienta `pcs`. Para crear dicho **cluster** ejecutaremos la siguiente linea:
 
 ```
-# Autentificamos ambos nodos que pertenecerán al cluster
+# Autenticamos ambos nodos que pertenecerán al cluster
 pcs host auth spongebob patrick -u hacluster -p *****
 
 # Creamos el cluster con ambos nodos
@@ -188,7 +188,6 @@ Por último solo tendremos que crear el **target** y la **lun** a través de **p
 pcs resource create iscsi-target ocf:heartbeat:iSCSITarget implementation="tgt" portals="192.168.1.200" iqn="iqn.2020-10.es.luisvazquezalejo:prueba" allowed_initiators="192.168.1.39 192.168.1.43" tid="1"  --group iscsi
 
 pcs resource create iscsi-lun1 ocf:heartbeat:iSCSILogicalUnit implementation="tgt" target_iqn=iqn.2020-10.es.luisvazquezalejo:prueba lun=1 path=/dev/drbd0 scsi_id="prueba.lun1" scsi_sn="1" --group iscsi
-pcs cluster cib-push /root/cluster
 ```
 ### Parámetros importantes
 

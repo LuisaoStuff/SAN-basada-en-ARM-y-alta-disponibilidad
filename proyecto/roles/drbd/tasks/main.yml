@@ -1,0 +1,35 @@
+- name: Copiar fichero recurso drbd
+  copy: >
+    src=hadisk.res
+    dest=/etc/drbd.d/
+    mode=644
+    owner=root
+    group=root
+
+- name: Crear recurso drbd
+  command: drbdadm create-md hadisk --force
+
+- name: Activar recurso drbd
+  command: drbdadm up hadisk
+
+- name: Forzar disco primario
+  command: drbdadm primary --force hadisk
+  when: ansible_hostname == 'spongebob'
+
+- name: Copiar script comprobación sincronización
+  copy: >
+    src=sincro.bash
+    dest=/root/
+    mode=644
+    owner=root
+    group=root
+  when: ansible_hostname == 'spongebob'
+
+- name: Esperar sincronización discos
+  command: bash /root/sincro.bash
+  when: ansible_hostname == 'spongebob'
+
+- name: Habilitar unidad Drbd
+  systemd:
+    name: drbd
+    enabled: yes
