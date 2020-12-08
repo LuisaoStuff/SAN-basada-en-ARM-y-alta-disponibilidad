@@ -19,7 +19,7 @@ Esto es en lo que, como mínimo, basaré el proyecto. No obstante dependiendo de
 - Receta de **ansible** para el despliegue (y posible escalado) de los nodos.
 
 ---------------------
-**Modelo** de la placa: https://www.ldlc.com/es-es/ficha/PB00269570.html
+**Modelo** de la placa: https://www.hardkernel.com/shop/odroid-hc1-home-cloud-one/
 
 **Especificaciones procesador**: https://gadgetversus.com/processor/samsung-exynos-5-octa-5422-specs/
 

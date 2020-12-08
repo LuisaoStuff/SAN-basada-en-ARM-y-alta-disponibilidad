@@ -15,13 +15,13 @@ apt update && apt upgrade -y
 # Instalamos el paquete xz-utils
 apt install xz-utils -y
 # Descomprimimos el fichero
-tar -xf ubuntu-20.04.1-5.4-minimal-odroid-xu4-20200812.img.xz
+xz -d ubuntu-20.04.1-5.4-minimal-odroid-xu4-20200812.img.xz
 ```
 A continuación instalaremos la el fichero imagen en nuestra tarjeta sd:
 ```
-dd bs=4M if=ubuntu-20.04.1-5.4-minimal-odroid-xu4-20200812.img of=/dev/sdb conv=fsync
+dd bs=4M if=ubuntu-20.04.1-5.4-minimal-odroid-xu4-20200812.img of=/dev/mmcblk0 conv=fsync
 ```
-Donde **ubuntu-20.04.1-5.4-minimal-odroid-xu4-20200812.img** sería el fichero imagen, y **/deb/sdb** sería el dispositivo de bloque, que en nuestro caso es la _tarjeta microSD_.
+Donde **ubuntu-20.04.1-5.4-minimal-odroid-xu4-20200812.img** sería el fichero imagen, y **/deb/mmcblk0** sería el dispositivo de bloque, que en nuestro caso es la _tarjeta microSD_.
 Repetiríamos el proceso para la segunda tarjeta.
 
 Para un primer acceso, dependiendo de la versión de ubuntu que hayamos instalado, tendremos las siguientes credenciales en el primer acceso:
@@ -41,7 +41,12 @@ La placa tiene un disipador pasivo de serie, que funcionará también como sopor
 
 Una vez tenemos ya todo montado, empezamos a instalar los paquetes necesarios con `apt`.
 
-`apt install pacemaker pcs drbd-utils tgt`
+```bash
+# Refrescamos la caché de apt
+apt update
+# Instalamos los paquetes que usaremos
+apt install pacemaker pcs drbd-utils tgt
+```
 
 También vamos a declarar en el fichero `/etc/hosts` la resolución de ambas máquinas.
 
@@ -83,7 +88,7 @@ Daemon Status:
   pcsd: active/enabled
 ```
 
-Antes de continuar vamos a crear y configurar el recurso de almacenamiento con el paquete `drbd-utils`. Para ello primero tendremos que crear el fichero de configuración que alojaremos en el directorio **/etc/drbd.d/** y guardaremos a ser posible con extensión **.res**. En mi caso lo llamaré **hadisk.res** y su contenido será el siguiente:
+Antes de continuar vamos a crear y configurar el recurso de almacenamiento con el paquete `drbd-utils`. Para ello primero tendremos que crear el fichero de configuración que alojaremos en el directorio **/etc/drbd.d/** en ambos nodos y guardaremos a ser posible con extensión **.res**. En mi caso lo llamaré **hadisk.res** y su contenido será el siguiente:
 
 ```
 resource hadisk {
@@ -109,7 +114,7 @@ resource hadisk {
 }
 ```
 
-Una vez definido el recurso, lo creamos y levantamos con el comando `drbdadm`.
+Una vez definido el recurso, lo creamos y levantamos con el comando `drbdadm` en ambos nodos.
 
 ```
 drbdadm create-md hadisk
