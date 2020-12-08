@@ -24,10 +24,10 @@
 
 - name: Habilitar unidad Pacemaker
   systemd:
-    - name: pacemaker
-    - enabled: yes
+    name: pacemaker
+    enabled: yes
 
 - name: Habilitar unidad Corosync
   systemd:
-    - name: corosync
-    - enabled: yes
+    name: corosync
+    enabled: yes
