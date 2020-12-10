@@ -55,38 +55,7 @@ También vamos a declarar en el fichero `/etc/hosts` la resolución de ambas má
 192.168.1.21	patrick
 ```
 
-Para la gestión de los distintos recursos y la creación del propio **cluster**, utilizaremos la herramienta `pcs`. Para crear dicho **cluster** ejecutaremos la siguiente linea:
-
-```
-# Autenticamos ambos nodos que pertenecerán al cluster
-pcs host auth spongebob patrick -u hacluster -p *****
-
-# Creamos el cluster con ambos nodos
-pcs cluster setup storage spongebob patrick --start --enable --force
-```
-
-Ahora podemos comprobar que ambos _nodos_ están en linea ejecutando `pcs status`, orden que utilizaremos a lo largo del proceso para consultar la disponibilidad del **cluster** y de los distintos **recursos**.  
-
-```
-pcs status
-Cluster name: storage
-Cluster Summary:
-  * Stack: corosync
-  * Current DC: spongebob (version 2.0.3-4b1f869f0f) - partition with quorum
-  * Last updated: Fri Oct 16 12:20:25 2020
-  * Last change:  Thu Oct 15 14:54:13 2020 by root via cibadmin on spongebob
-  * 2 nodes configured
-
-Node List:
-  * Online: [ patrick spongebob ]
-
-Full List of Resources:
-
-Daemon Status:
-  corosync: active/enabled
-  pacemaker: active/enabled
-  pcsd: active/enabled
-```
+### DRBD
 
 Antes de continuar vamos a crear y configurar el recurso de almacenamiento con el paquete `drbd-utils`. Para ello primero tendremos que crear el fichero de configuración que alojaremos en el directorio **/etc/drbd.d/** en ambos nodos y guardaremos a ser posible con extensión **.res**. En mi caso lo llamaré **hadisk.res** y su contenido será el siguiente:
 
@@ -156,6 +125,41 @@ mmcblk1
 └─mmcblk1p2 ext4   rootfs e139ce78-9841-40fe-8823-96a304a09859      5G    29% /
 ```
 
+### Pacemaker
+
+Para la gestión de los distintos recursos y la creación del propio **cluster**, utilizaremos la herramienta `pcs`. Para crear dicho **cluster** ejecutaremos la siguiente linea:
+
+```
+# Autenticamos ambos nodos que pertenecerán al cluster
+pcs host auth spongebob patrick -u hacluster -p *****
+
+# Creamos el cluster con ambos nodos
+pcs cluster setup storage spongebob patrick --start --enable --force
+```
+
+Ahora podemos comprobar que ambos _nodos_ están en linea ejecutando `pcs status`, orden que utilizaremos a lo largo del proceso para consultar la disponibilidad del **cluster** y de los distintos **recursos**.  
+
+```
+pcs status
+Cluster name: storage
+Cluster Summary:
+  * Stack: corosync
+  * Current DC: spongebob (version 2.0.3-4b1f869f0f) - partition with quorum
+  * Last updated: Fri Oct 16 12:20:25 2020
+  * Last change:  Thu Oct 15 14:54:13 2020 by root via cibadmin on spongebob
+  * 2 nodes configured
+
+Node List:
+  * Online: [ patrick spongebob ]
+
+Full List of Resources:
+
+Daemon Status:
+  corosync: active/enabled
+  pacemaker: active/enabled
+  pcsd: active/enabled
+```
+
 Una vez tenemos todo esto preparado, comenzamos a crear y configurar los **recursos** de **pacemaker**. Estos son **agentes** gestionados por **corosync** para que los paquetes en cuestión esten sincronizados entre los distintos nodos y puedan beneficiarse del _cluster_ en si mismo. Aunque antes de empezar a generarlos, tendremos que desactivar la opción **Stonith** para que funcione correctamente. 
 
 ```
@@ -189,14 +193,13 @@ pcs resource create iscsi-target ocf:heartbeat:iSCSITarget implementation="tgt" 
 
 pcs resource create iscsi-lun1 ocf:heartbeat:iSCSILogicalUnit implementation="tgt" target_iqn=iqn.2020-10.es.luisvazquezalejo:prueba lun=1 path=/dev/drbd0 scsi_id="prueba.lun1" scsi_sn="1" --group iscsi
 ```
-### Parámetros importantes
+#### Parámetros importantes
 
 * `implementation=tgt`: Incidamos el paquete que usuará para gestionar los **target** y las **lun**
 * `portals="192.168.1.200"`: Será la dirección IP a través de la cual, los clientes accederán a los recursos de **ISCSI**
 * `iqn="iqn.2020-10.es.luisvazquezalejo:prueba"`: Es un parámetro propio de **ISCSI** e indica la dirección que usarán los clientes para conectarse.
 * `allowed_initiators="192.168.1.39 192.168.1.43"`: Es un parámetro propio de **ISCSI** y sirve para especificar qué clientes tienen permiso para acceder a las **lun**. Funcionaría de una forma parecida a las **ACL**.
 * `path=/dev/drbd0`: Es la ruta de la unidad física o lógica que usaremos, en este caso la unidad generada por **drbd**.
-
 
 
 Podemos comprobar el estado y funcionamiento del **target** y la **lun** ejecutando el siguiente comando:

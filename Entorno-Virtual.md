@@ -77,7 +77,7 @@ ip l set dev tap1 up
 
 Con esto ya tendríamos preparadas las dos interfaces de red y solo nos quedaría generar una dirección **MAC** aleatoria para cada una, aunque esto lo haremos en el momento de iniciar ambas máquinas con _qemu_.
 
-## Creación de las máquinas
+### Creación de las máquinas
 
 Para poder emular una maquina arm, necesitaremos un **kernel** modificado y la correspondiente imagen de [Raspbian Buster](https://www.raspberrypi.org/blog/buster-the-new-version-of-raspbian/). La imagen del kernel modificada la obtendremos de este [repositorio](https://github.com/dhruvvyas90/qemu-rpi-kernel). En mi caso descargaré los ficheros [kernel-qemu-4.19.50-buster](https://github.com/dhruvvyas90/qemu-rpi-kernel/raw/master/kernel-qemu-4.19.50-buster) y [versatile-pb-buster.dtb](https://github.com/dhruvvyas90/qemu-rpi-kernel/raw/master/versatile-pb-buster.dtb). La imagen del sistema operativo la descargaré de la propia página de [raspberry.org](https://www.raspberrypi.org/downloads/raspbian/).
 Primero descomprimimos el fichero **zip** contenedor de la imagen de _raspbian buster_ y una vez hecho esto, la convertiremos a **qcow2** y extenderemos un poco su tamaño:

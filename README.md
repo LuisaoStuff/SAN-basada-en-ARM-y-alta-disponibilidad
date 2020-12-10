@@ -30,6 +30,8 @@ Esto es en lo que, como mínimo, basaré el proyecto. No obstante dependiendo de
   * [Consumo](/Características-y-ventajas-de-ARM.md#consumo)
   * [Pruebas de rendimiento](/Características-y-ventajas-de-ARM.md#pruebas-de-rendimiento)
 * [Emulación del entorno](/Entorno-Virtual.md)
+  * [Emulación del entorno](/Entorno-Virtual.md#interfaz-de-red-virtual)
+  * [Emulación del entorno](/Entorno-Virtual.md#creación-de-las-máquinas)
 * [Instalación](/Instalación-Manual.md)
 * [Despliegue automático](/Instalación-con-Ansible.md)
 
