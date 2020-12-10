@@ -26,17 +26,43 @@ Una prueba de que este modelo de sistema está siendo un éxito es que hace poco
 
 ## Pruebas de rendimiento
 
-Para realizar las pruebas, me limitaré a utilizar el paquete **samba**. Probaré a subir y descargar un fichero de 5Gb.
+Para realizar las pruebas, he decidido usar `samba` y el paquete `cifs-utils` que me permetirá montar ambos directorios en el equipo desde el que realizaré dichas pruebas. Para no complicarlo demasiado, usaré `dd` ya que es sencillo y tiene múltiples parámetros.
+La configuración que he definido en ambas máquinas es la siguiente:
 
-### ARM
+```
+# Fichero /etc/samba/smb.conf
 
-![](/recursos/img/ARM-Descarga.png)
-![](/recursos/img/ARM-Subida.png)
+# Odroid HC1
 
-* Hemos obtenido una velocidad media tanto de subida como de bajada de unos **60Mbs**
+[ARM]
 
-### x86
+comment = Benchmark
+path = /Samba
+browseable = yes
+guest ok = yes
+read only = no
 
-![](/recursos/img/x86-Descarga.png)
-![](/recursos/img/x86-Subida.png)
+# x86 System
 
+[x86]
+
+comment = Benchmark
+path = /Samba
+browseable = yes
+read only = no
+guest ok = yes
+```
+> Cabe mencionar que ambos directorios tienen los permisos habilitados de lectura y escritura para todos los usuarios
+
+Después reinicio el servicio `smbd.service` y listo. Tan solo quedaría montar ambos directorios en la máquina de pruebas. Para ello usamos el comando `mount` tal y como nos indican en [Linuxize](https://linuxize.com/post/how-to-mount-cifs-windows-share-on-linux/). En mi caso sería:
+
+```
+mount -t cifs //cloud/x86 /x86 -o rw
+mount -t cifs //spongebob/ARM ARM -o rw
+```
+
+Una vez preparado todo, procedemos con las pruebas de rendimiento. Dejo por [aquí](/recursos/scripts/samba-benchmark.bash) la lista de los 4 comandos que he utilizado. Por otro lado, la explicación del porqué de cada parámetro, podréis encontrarla en este [post](https://www.linux.org/threads/nas-storage-performance-testing-using-dd-command.8717/).
+
+El resultado de estas pruebas es el siguiente:
+
+![](/recursos/img/benchmark.png)
