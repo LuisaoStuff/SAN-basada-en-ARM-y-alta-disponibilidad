@@ -244,13 +244,4 @@ Target 1: iqn.2020-10.es.luisvazquezalejo:prueba
         192.168.1.43
 ```
 
-
---# Instalamos iscsi en el cliente
-
-apt install open-iscsi
-
---# Comprobamos targets desde el cliente al cluster
-
-iscsiadm -m discovery -t st -p 192.168.1.201
-
-iscsiadm --mode node --targetname iqn.2020-10.es.luisvazquezalejo:prueba -p 192.168.1.200:3260 -l
+Para más información sobre **ISCSI** como la configuración de los clientes (tanto en Linux como en Windows), tengo un articulo en mi blog técnico donde lo explico de forma más detallada: [Introducción a ISCSI](https://blog.luisvazquezalejo.es/Introducción-a-ISCSI/)
