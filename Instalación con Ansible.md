@@ -42,3 +42,6 @@ En este caso los _roles_ serían:
 
 Las tareas de dichos roles están definidas a su vez dentro de su propio directorio en **/tasks/main.yml**. Por otro lado tenemos el fichero [site.yml](/ansible/site.yml), que contiene la "_receta_" o el _orden_  en el que se ejecutarán estos roles y en qué _nodos_ se aplicarán.
 Dentro de cada _rol_, tendremos ficheros de configuración y/o scripts que se copiarán en los nodos correspondientes para su posterior uso. Un ejemplo de esto es el fichero [hadisk.res](/ansible/roles/drbd/files/hadisk.res) que contiene la configuración del recurso **drbd**.
+
+
+Por último tenemos los ficheros de configuración del entorno, donde se definen parámetros como el usuario remoto, la _clave privada_ que se va a usar para el acceso **ssh** ([ansible.cfg](/ansible/ansible.cfg)) y la resolución de los nombres de los nodos, así como su respectiva agrupación ([hosts](/ansible/hosts))
