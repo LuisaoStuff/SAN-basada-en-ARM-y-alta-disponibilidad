@@ -1,3 +1,3 @@
 # Desarrollo y estructura del "playbook"
 
-Antes de nada, vamos a conocer un poco qué es **Ansible**, y para qué se utiliza. En pocas palabras, es un **software de orquestación** que se utiliza para, a través de ficheros **yaml**, _desplegar y configurar_ una infraestructura. En mi caso, utilizaré dicho _software_ para instalar los paquetes necesarios, y en resumen desplegar todo el entorno descrito en el apartado [Instalación Manual](/Instalación Manual.md))
+Antes de nada, vamos a conocer un poco qué es **Ansible**, y para qué se utiliza. En pocas palabras, es un **software de orquestación** que se utiliza para, a través de ficheros **yaml**, _desplegar y configurar_ una infraestructura. En mi caso, utilizaré dicho _software_ para instalar los paquetes necesarios, y en resumen desplegar todo el entorno descrito en el apartado [Instalación Manual](/Instalación Manual.md)
