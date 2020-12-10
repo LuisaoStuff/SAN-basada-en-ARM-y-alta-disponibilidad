@@ -253,31 +253,4 @@ apt install open-iscsi
 
 iscsiadm -m discovery -t st -p 192.168.1.201
 
-iscsiadm --mode node --targetname iqn.2020-10.es.luisvazquezalejo:prueba --portal 192.168.1.200:3260
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-pcs resource create iscsi-target ocf:heartbeat:iSCSITarget implementation="tgt" portals="192.168.1.200" iqn="iqn.2020-10.es.luisvazquezalejo:prueba" tid="1" --group iscsi
-
-
-
-
-
-
-cp -r /etc/skel/Maildir /mail/
-chown -R mail:mail /mail/Maildir
-chmod -R 700 /mail/Maildir
-adduser mail mail
+iscsiadm --mode node --targetname iqn.2020-10.es.luisvazquezalejo:prueba -p 192.168.1.200:3260 -l
