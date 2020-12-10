@@ -22,7 +22,7 @@ Además de esta particularidad, en los últimos años **ARM** ha optado por segu
 
 ![](/recursos/img/system-on-a-chip.png)
 
-Una prueba de que este modelo de sistema está siendo un éxito es que hace poco, **Intel** ha desarrollado la nueva familia [Lakefield](https://ark.intel.com/content/www/es/es/ark/products/codename/81657/lakefield.html). Es una nueva generación de procesadores **x86** está basado en **big.LITTLE** de _5 núcleos_; 4 "little" y 1 "big".
+Una prueba de que este modelo de sistema está siendo un éxito es que hace poco, **Intel** ha desarrollado la nueva familia [Lakefield](https://ark.intel.com/content/www/es/es/ark/products/codename/81657/lakefield.html). Es una nueva generación de procesadores **x86** está basado en **big.LITTLE** de _5 núcleos_; 4 "little" y 1 "big". También tenemos que **Apple** desde hace unos meses, ha empezado a fabricar sus propios procesadores, los llamados [Apple M1](https://www.apple.com/mac/m1/) para su nueva generación de ordenadores portátiles, y que utiliza el mismo concepto **big.LITTLE**.
 
 ## Pruebas de rendimiento
 

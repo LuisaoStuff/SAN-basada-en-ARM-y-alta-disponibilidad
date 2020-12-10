@@ -25,7 +25,7 @@ Esto es en lo que, como mínimo, basaré el proyecto. No obstante dependiendo de
 
 ## Índice
 
-* [¿Por qué ARM?](/Características-y-ventajas-de-ARM.md)
+* [¿Por qué ARM?](/Características-y-ventajas-de-ARM.md#por-qué-arm)
   * [Especificaciones Odroid HC1](/Características-y-ventajas-de-ARM.md#características-de-odroid-hc1)
   * [Consumo](/Características-y-ventajas-de-ARM.md#consumo)
   * [Pruebas de rendimiento](/Características-y-ventajas-de-ARM.md#pruebas-de-rendimiento)

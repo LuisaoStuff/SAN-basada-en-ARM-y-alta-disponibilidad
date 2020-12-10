@@ -10,6 +10,7 @@ Comenzamos instalando una serie de paquetes y dependencias que nos serán necesa
 apt update
 apt install libpixman-1-dev zlib1g-dev libglib2.0-dev shtool build-essential qemu-system-arm
 ```
+### Interfaz de red virtual
 
 También procederemos a la creación de una interfaz de tipo _tap_ conectada a una interfaz puente (**br0**) para permitir el acceso a la **SAN** desde los distintos dispositivos de la red.
 Tal y como nos explican en la entrada [KVM “a pelo”](https://albertomolina.wordpress.com/2016/03/17/kvm-a-pelo/) tendremos que definir en el fichero **/etc/network/interfaces** una interfaz de tipo **bridge**, donde especificaremos a qué interfaz física estará conectada. En mi caso estará definido de este modo:
