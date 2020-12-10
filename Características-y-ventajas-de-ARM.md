@@ -1,3 +1,4 @@
+# ¿Por qué ARM?
 ## Características de Odroid-HC1
 
 * CPU: [Samsung Exynos5422 Cortex-A15](https://www.samsung.com/semiconductor/global.semi.static/minisite/exynos/file/solution/MobileProcessor-5-Octa-5422.pdf)
