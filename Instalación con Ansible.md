@@ -29,7 +29,7 @@ ansible/
 │       │   └── cluster_start.bash
 │       └── tasks
 │           └── main.yml
-└── site.yaml
+└── site.yml
 
 ```
 
@@ -40,4 +40,5 @@ En este caso los _roles_ serían:
 * [pacemaker](/ansible/roles/pacemaker): Crea el cluster y define los _agentes_ de **drbd** e inicia el **target** y la **lun** de **ISCSI** con el _agente_ correspondiente. 
 
 
-Por otro lado tenemos el fichero 
+Las tareas de dichos roles están definidas a su vez dentro de su propio directorio en **/tasks/main.yml**. Por otro lado tenemos el fichero [site.yml](/ansible/site.yml), que contiene la "_receta_" o el _orden_  en el que se ejecutarán estos roles y en qué _nodos_ se aplicarán.
+Dentro de cada _rol_, tendremos ficheros de configuración y/o scripts que se copiarán en los nodos correspondientes para su posterior uso. Un ejemplo de esto es el fichero [hadisk.res](/ansible/roles/drbd/files/hadisk.res) que contiene la configuración del recurso **drbd**.
