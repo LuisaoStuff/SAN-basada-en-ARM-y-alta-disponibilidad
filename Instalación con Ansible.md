@@ -44,4 +44,21 @@ Las tareas de dichos roles están definidas a su vez dentro de su propio directo
 Dentro de cada _rol_, tendremos ficheros de configuración y/o scripts que se copiarán en los nodos correspondientes para su posterior uso. Un ejemplo de esto es el fichero [hadisk.res](/ansible/roles/drbd/files/hadisk.res) que contiene la configuración del recurso **drbd**.
 
 
-Por último tenemos los ficheros de configuración del entorno, donde se definen parámetros como el usuario remoto, la _clave privada_ que se va a usar para el acceso **ssh** ([ansible.cfg](/ansible/ansible.cfg)) y la resolución de los nombres de los nodos, así como su respectiva agrupación ([hosts](/ansible/hosts))
+Por último tenemos los ficheros de configuración del entorno, donde se definen parámetros como el usuario remoto, la _clave privada_ que se va a usar para el acceso **ssh** ([ansible.cfg](/ansible/ansible.cfg)) y la resolución de los nombres de los nodos, así como su respectiva agrupación ([hosts](/ansible/hosts)).
+
+### Requisitos previos
+
+Para su correcto funcionamiento, necesitaremos preparar los nodos. Tan solo tendremos que instalar el paquete `python` y configurar `ssh`. Para instalar el paquete simplemente ejecutamos:
+
+`apt install python`
+
+Después añadimos la clave pública al fichero **.ssh/authorized_keys** del usuario **root**. Esto podemos hacerlo simplemente copiando el contenido de la clave pública que vayamos a utilizar y pegándolo dentro de ese fichero. Después tendremos que dirigirnos a **/etc/ssh/sshd_config** y modificar las siguientes dos lineas quedando así:
+
+```bash
+...
+
+PermitRootLogin prohibit-password
+PubkeyAuthentication yes
+
+...
+```
