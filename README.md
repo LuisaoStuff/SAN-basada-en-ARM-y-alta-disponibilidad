@@ -30,9 +30,14 @@ Esto es en lo que, como mínimo, basaré el proyecto. No obstante dependiendo de
   * [Consumo](/Características-y-ventajas-de-ARM.md#consumo)
   * [Pruebas de rendimiento](/Características-y-ventajas-de-ARM.md#pruebas-de-rendimiento)
 * [Emulación del entorno](/Entorno-Virtual.md)
-  * [Emulación del entorno](/Entorno-Virtual.md#interfaz-de-red-virtual)
-  * [Emulación del entorno](/Entorno-Virtual.md#creación-de-las-máquinas)
+  * [Linux Bridges](/Entorno-Virtual.md#interfaz-de-red-virtual)
+  * [Creación de las máquinas](/Entorno-Virtual.md#creación-de-las-máquinas)
 * [Instalación](/Instalación-Manual.md)
+  * [Preparación de las tarjetas microSD](/Instalación-Manual.md#preparación-de-las-tarjetas-microsd)
+  * [Montaje del equipo](/Instalación-Manual.md#montaje-del-equipo)
+  * [Instalación y configuración de la paquetería](/Instalación-Manual.md#instalación-y-configuración-de-la-paquetería)
+    * [DRBD](/Instalación-Manual.md#drbd)
+    * [Pacemaker](/Instalación-Manual.md#pacemaker)
 * [Despliegue automático](/Instalación-con-Ansible.md)
 
 
