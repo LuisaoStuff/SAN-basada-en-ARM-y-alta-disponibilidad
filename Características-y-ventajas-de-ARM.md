@@ -66,3 +66,11 @@ Una vez preparado todo, procedemos con las pruebas de rendimiento. Dejo por [aqu
 El resultado de estas pruebas es el siguiente:
 
 ![](/recursos/img/benchmark.png)
+
+Si sintetizamos un poco los resultados, nos damos cuenta que de media (tanto en **lectura** como en **escritura**), el sistema **ARM** es un **33'68% menos potente** respecto al sistema **x86**. Sin embargo, si recordamos el consumo de ambas máquinas y lo comparamos con el rendimiento obtenido, tenemos lo siguiente:
+
+> El consumo que utilizo para calcular la eficiencia es cercano al **TDP** de ambos procesadores, ya que en ese momento el propio porcentaje de _uso de CPU_ es cercano al 100. Esto es un gráfico orientativo
+
+![](/recursos/img/eficiencia.png)
+
+Y es que en este caso, podemos ver como el sistema **ARM** es un **863%** más eficiente en esta tarea que el sistema **x86**.
