@@ -72,81 +72,81 @@ En el controlador (desde el que ejecutaremos el _playbook_), solo necesitaremos 
 Una vez que ejecutamos el playbook, debemos obtener una salida por pantalla como esta:
 
 ```bash
-PLAY [all] ***************************************************************************************************************************************
+PLAY [all] ***************************************************************************************************************
 
-TASK [Gathering Facts] ***************************************************************************************************************************
+TASK [Gathering Facts] ***************************************************************************************************
 ok: [patrick]
 ok: [spongebob]
 
-TASK [commons : Actualizar sistemas] *************************************************************************************************************
+TASK [commons : Actualizar sistemas] *************************************************************************************
 changed: [spongebob]
 changed: [patrick]
 
-TASK [commons : Instalar todos los paquetes] *****************************************************************************************************
+TASK [commons : Instalar todos los paquetes] *****************************************************************************
 changed: [spongebob]
 changed: [patrick]
 
-TASK [commons : Cambiar contraseña al usuario hacluster] *****************************************************************************************
+TASK [commons : Cambiar contraseña al usuario hacluster] *****************************************************************
 changed: [spongebob]
 changed: [patrick]
 
-TASK [commons : Copiar /etc/hosts] ***************************************************************************************************************
+TASK [commons : Copiar /etc/hosts] ***************************************************************************************
 ok: [spongebob]
 ok: [patrick]
 
-TASK [drbd : Copiar fichero recurso drbd] ********************************************************************************************************
+TASK [drbd : Copiar fichero recurso drbd] ********************************************************************************
 changed: [spongebob]
 changed: [patrick]
 
-TASK [drbd : Crear recurso drbd] *****************************************************************************************************************
+TASK [drbd : Crear recurso drbd] *****************************************************************************************
 changed: [patrick]
 changed: [spongebob]
 
-TASK [drbd : Activar recurso drbd] ***************************************************************************************************************
+TASK [drbd : Activar recurso drbd] ***************************************************************************************
 changed: [spongebob]
 changed: [patrick]
 
-TASK [drbd : Forzar disco primario] **************************************************************************************************************
+TASK [drbd : Forzar disco primario] **************************************************************************************
 skipping: [patrick]
 changed: [spongebob]
 
-TASK [drbd : Copiar script comprobación sincronización] ******************************************************************************************
+TASK [drbd : Copiar script comprobación sincronización] ******************************************************************
 skipping: [patrick]
 changed: [spongebob]
 
-TASK [drbd : Esperar sincronización discos] ******************************************************************************************************
+TASK [drbd : Esperar sincronización discos] ******************************************************************************
 skipping: [patrick]
 changed: [spongebob]
 
-TASK [drbd : Habilitar unidad Drbd] **************************************************************************************************************
+TASK [drbd : Habilitar unidad Drbd] **************************************************************************************
 changed: [spongebob]
 changed: [patrick]
 
-TASK [pacemaker : Copiar script inicialización] **************************************************************************************************
+TASK [pacemaker : Copiar script inicialización] **************************************************************************
 changed: [spongebob]
 changed: [patrick]
 
-TASK [pacemaker : Inicializar el cluster] ********************************************************************************************************
+TASK [pacemaker : Inicializar el cluster] ********************************************************************************
 changed: [spongebob]
 changed: [patrick]
 
-TASK [pacemaker : Copiar script configuración] ***************************************************************************************************
+TASK [pacemaker : Copiar script configuración] ***************************************************************************
 skipping: [patrick]
 changed: [spongebob]
 
-TASK [pacemaker : Configurar recursos del cluster] ***********************************************************************************************
+TASK [pacemaker : Configurar recursos del cluster] ***********************************************************************
 skipping: [patrick]
 changed: [spongebob]
 
-TASK [pacemaker : Habilitar unidad Pacemaker] ****************************************************************************************************
+TASK [pacemaker : Habilitar unidad Pacemaker] ****************************************************************************
 ok: [spongebob]
 ok: [patrick]
 
-TASK [pacemaker : Habilitar unidad Corosync] *****************************************************************************************************
+TASK [pacemaker : Habilitar unidad Corosync] *****************************************************************************
 ok: [patrick]
 ok: [spongebob]
 
-PLAY RECAP ***************************************************************************************************************************************
+PLAY RECAP ***************************************************************************************************************
 patrick                    : ok=13   changed=9    unreachable=0    failed=0   
 spongebob                  : ok=18   changed=14   unreachable=0    failed=0 
 ```
