@@ -62,3 +62,91 @@ PubkeyAuthentication yes
 
 ...
 ```
+
+De esta forma evitaremos que se acceda como root al sistema por contraseña y permitiremos la autenticación por _clave pública-clave privada_.
+
+En el controlador (desde el que ejecutaremos el _playbook_), solo necesitaremos instalar el paquete **ansible**.
+
+`apt install ansible`
+
+Una vez que ejecutamos el playbook, debemos obtener una salida por pantalla como esta:
+
+```bash
+PLAY [all] ***************************************************************************************************************************************
+
+TASK [Gathering Facts] ***************************************************************************************************************************
+ok: [patrick]
+ok: [spongebob]
+
+TASK [commons : Actualizar sistemas] *************************************************************************************************************
+changed: [spongebob]
+changed: [patrick]
+
+TASK [commons : Instalar todos los paquetes] *****************************************************************************************************
+changed: [spongebob]
+changed: [patrick]
+
+TASK [commons : Cambiar contraseña al usuario hacluster] *****************************************************************************************
+changed: [spongebob]
+changed: [patrick]
+
+TASK [commons : Copiar /etc/hosts] ***************************************************************************************************************
+ok: [spongebob]
+ok: [patrick]
+
+TASK [drbd : Copiar fichero recurso drbd] ********************************************************************************************************
+changed: [spongebob]
+changed: [patrick]
+
+TASK [drbd : Crear recurso drbd] *****************************************************************************************************************
+changed: [patrick]
+changed: [spongebob]
+
+TASK [drbd : Activar recurso drbd] ***************************************************************************************************************
+changed: [spongebob]
+changed: [patrick]
+
+TASK [drbd : Forzar disco primario] **************************************************************************************************************
+skipping: [patrick]
+changed: [spongebob]
+
+TASK [drbd : Copiar script comprobación sincronización] ******************************************************************************************
+skipping: [patrick]
+changed: [spongebob]
+
+TASK [drbd : Esperar sincronización discos] ******************************************************************************************************
+skipping: [patrick]
+changed: [spongebob]
+
+TASK [drbd : Habilitar unidad Drbd] **************************************************************************************************************
+changed: [spongebob]
+changed: [patrick]
+
+TASK [pacemaker : Copiar script inicialización] **************************************************************************************************
+changed: [spongebob]
+changed: [patrick]
+
+TASK [pacemaker : Inicializar el cluster] ********************************************************************************************************
+changed: [spongebob]
+changed: [patrick]
+
+TASK [pacemaker : Copiar script configuración] ***************************************************************************************************
+skipping: [patrick]
+changed: [spongebob]
+
+TASK [pacemaker : Configurar recursos del cluster] ***********************************************************************************************
+skipping: [patrick]
+changed: [spongebob]
+
+TASK [pacemaker : Habilitar unidad Pacemaker] ****************************************************************************************************
+ok: [spongebob]
+ok: [patrick]
+
+TASK [pacemaker : Habilitar unidad Corosync] *****************************************************************************************************
+ok: [patrick]
+ok: [spongebob]
+
+PLAY RECAP ***************************************************************************************************************************************
+patrick                    : ok=13   changed=9    unreachable=0    failed=0   
+spongebob                  : ok=18   changed=14   unreachable=0    failed=0 
+```
