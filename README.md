@@ -39,5 +39,7 @@ Esto es en lo que, como mínimo, basaré el proyecto. No obstante dependiendo de
     * [DRBD](/Instalación-Manual.md#drbd)
     * [Pacemaker](/Instalación-Manual.md#pacemaker)
 * [Despliegue automático](/Instalación-con-Ansible.md)
+* [Conclusiones](/Conclusión.md#conclusiones)
+* [Próximos pasos](/Conclusión.md#próximos-pasos)
 
 
