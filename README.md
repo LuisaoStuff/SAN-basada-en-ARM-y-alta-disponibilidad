@@ -6,7 +6,7 @@ Usaré tres placas **Odroid-hc1** para crear un cluster de almacenamiento (con a
 
 ### Tecnologías que se van a utilizar
 
-Usaré el la última versión de **Ubuntu 20.04.1 LTS**, una distribución pensada para esta arquitectura y que soporta el procesador que tiene la placa. Para el sistema de _alta disponibilidad_ usaré **PeaceMaker**, junto con **DRBD** para la sincronización de los discos e **ISCSI** a la hora de exportar los dispositivos de bloques.
+Usaré el la última versión de **Ubuntu 20.04.1 LTS**, una distribución pensada para esta arquitectura y que soporta el procesador que tiene la placa. Para el sistema de _alta disponibilidad_ usaré **PaceMaker**, junto con **DRBD** para la sincronización de los discos e **ISCSI** a la hora de exportar los dispositivos de bloques.
 
 ### Resultados que se esperan obtener
 
